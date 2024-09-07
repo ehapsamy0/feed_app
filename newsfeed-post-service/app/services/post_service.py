@@ -15,8 +15,8 @@ def get_all_posts_service(db):
 
 
 def create_new_post(db, title, user_id, content):
-    post_id = create_post(db, title, user_id, content)
-    return {"post_id": post_id, "message": "Post created successfully!"}
+    post_id, title = create_post(db, title, user_id, content)
+    return {"post_id": post_id,"title":title, "message": "Post created successfully!"}
 
 
 def get_post(db, post_id):
