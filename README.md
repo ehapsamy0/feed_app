@@ -13,15 +13,15 @@ The following are the database structure diagrams for the various services:
 
 ### User Service
 
-![User Service](https://github.com/ehapsamy0/feed_app/blob/post-service-init/erd/user_service.jpeg)
+![User Service](https://github.com/ehapsamy0/feed_app/blob/main/erd/user_service.jpeg)
 
 ### Post Service
 
-![Post Service](https://github.com/ehapsamy0/feed_app/blob/post-service-init/erd/post_service.jpeg)
+![Post Service](https://github.com/ehapsamy0/feed_app/blob/main/erd/post_service.jpeg)
 
 ### Following Service
 
-![Following Service](https://github.com/ehapsamy0/feed_app/blob/post-service-init/erd/following_service.jpeg)
+![Following Service](https://github.com/ehapsamy0/feed_app/blob/main/erd/following_service.jpeg)
 
 ## Project Structure
 
