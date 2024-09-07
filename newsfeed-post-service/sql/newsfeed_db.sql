@@ -1,0 +1,73 @@
+CREATE DATABASE IF NOT EXISTS newsfeed_user_db;
+USE newsfeed_user_db;
+
+CREATE TABLE IF NOT EXISTS role (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name BIGINT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS User (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    role_id BIGINT UNSIGNED NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    is_active BOOLEAN NOT NULL
+);
+
+ALTER TABLE User ADD UNIQUE user_username_unique(username);
+ALTER TABLE User ADD UNIQUE user_email_unique(email);
+
+ALTER TABLE User 
+    ADD CONSTRAINT user_role_id_foreign 
+    FOREIGN KEY (role_id) REFERENCES role(id);
+
+
+
+CREATE DATABASE IF NOT EXISTS newsfeed_db;
+USE newsfeed_db;
+
+
+CREATE TABLE IF NOT EXISTS Post (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    user_id CHAR(36) NOT NULL,
+    content TEXT NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    is_deleted BOOLEAN NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS comment (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id CHAR(36) NOT NULL,
+    post_id BIGINT UNSIGNED NOT NULL,
+    content TEXT NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS likes (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id CHAR(36) NOT NULL,
+    post_id BIGINT UNSIGNED NOT NULL
+);
+
+ALTER TABLE comment ADD CONSTRAINT comment_post_id_foreign FOREIGN KEY (post_id) REFERENCES Post(id) ON DELETE CASCADE;
+ALTER TABLE likes ADD CONSTRAINT likes_post_id_foreign FOREIGN KEY (post_id) REFERENCES Post(id) ON DELETE CASCADE;
+
+
+
+
+CREATE DATABASE IF NOT EXISTS newsfeed_followers_db;
+USE newsfeed_followers_db;
+
+CREATE TABLE IF NOT EXISTS followers (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    following_id CHAR(36) NOT NULL,
+    follow_id CHAR(36) NOT NULL,
+    accepted BOOLEAN NOT NULL,
+    created_at DATETIME NOT NULL
+);
