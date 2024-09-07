@@ -19,9 +19,8 @@ def create_post(db, title, user_id, content):
     """
     cursor.execute(query, (post_id, title, user_id, content))
     db.commit()
-    post_id = cursor.lastrowid
     cursor.close()
-    return post_id
+    return post_id, title
 
 
 def get_post_by_id(db, post_id):
